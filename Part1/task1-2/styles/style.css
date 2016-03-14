@@ -1,0 +1,155 @@
+/*** reset ***/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,header,nav,footer,aside,article {    
+     margin: 0;   
+     padding: 0;   
+} 
+table {  
+     border-collapse: collapse;   
+     border-spacing: 0;   
+} 
+fieldset,img {    
+     border: 0;   
+} 
+address,caption,cite,code,dfn,em,strong,th,var {  
+     font-style: normal;   
+     font-weight: normal;   
+} 
+ul {  
+     list-style: none;   
+} 
+h1,h2,h3,h4,h5,h6 {  
+     font-weight: normal;   
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    height: 60px;
+    background: #333333;
+}
+
+body {
+    font-family: "微软雅黑";
+    font-size: 14px;
+    background: #DEDEDE
+}
+
+header > nav {
+    float: right;
+}
+
+.nav {
+    margin-right: 15px;
+    list-style-type: disc;
+}
+
+.nav > li {
+    float: left;
+    margin-right: 25px;
+}
+
+.nav > li a {
+    line-height: 60px;
+    font-size: 12px;
+    color: #fff;
+}
+
+.nav > li:last-child a {
+    color: #ccc;
+}
+
+main {
+    width: 100%;
+}
+
+article {
+    width: 1240px;
+    margin: 20px auto;
+    padding: 35px 20px;
+    background: #fff;
+}
+
+.h3-title {
+    margin-top: 23px;
+    color: #5F5E5A;   
+}
+
+article p {
+    line-height: 25px;
+}
+
+.author-time {
+    margin-top: 10px;
+    font-size: 10px;
+    color: #5F5E5A;
+}
+
+.author-time + p {
+    margin-top: 10px;
+    text-indent: 28px;
+}
+
+.par-pic {
+    margin: 20px 0;
+}
+
+.par-pic + p {
+    text-indent: 28px;
+}
+
+.show-pic-ul {
+    margin-left: 30px;
+    margin-top: 13px;
+}
+
+.show-pic-list {
+    display: block;
+    width: 125px;
+    height: 120px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+.show-pic-list  p {
+    line-height: 2em;
+    text-align: center;
+}
+
+.beautiful-pic {
+    width: 100px;
+    height: 80px;
+    margin: 0 10px 10px 12px;
+}
+
+.author-time + ol {
+    margin: 10px 0 10px 45px;
+}
+
+.table-style,.table-style tr,.table-style th,.table-style td {
+    width: 1195px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    text-indent: 5px;
+}
+
+.table-style th {
+    height: 23px;
+    background: #333333;
+    color: #fff;
+    text-align: left;
+}
+
+.table-style tr {
+    height: 23px;
+}
+
+.last-tr-style {
+    background: #ccc;
+    color: #000;
+}
+
+.last-rol {
+    width: 208px;
+}
