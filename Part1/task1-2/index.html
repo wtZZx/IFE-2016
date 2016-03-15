@@ -126,31 +126,31 @@
                     <tr>
                         <th>表头</th>
                         <th>表头</th>
-                        <th class="last-rol">表头</th>
+                        <th class="width-208">表头</th>
                     </tr>
                     
                     <tr>
                         <td>表内容单元格</td>
                         <td>表内容单元格</td>
-                        <td class="last-rol"><a href="#">操作</a></td>
+                        <td class="width-208"><a href="#">操作</a></td>
                     </tr>
                     
                     <tr>
                         <td>表内容单元格</td>
                         <td>表内容单元格</td>
-                        <td class="last-rol"><a href="#">操作</a></td>
+                        <td class="width-208"><a href="#">操作</a></td>
                     </tr>
                     
                     <tr>
                         <td>表内容单元格</td>
                         <td>表内容单元格</td>
-                        <td class="last-rol"><a href="#">操作</a></td>
+                        <td class="width-208"><a href="#">操作</a></td>
                     </tr>
                     
                     <tr>
                         <td>表内容单元格</td>
                         <td>表内容单元格</td>
-                        <td class="last-rol"><a href="#">操作</a></td>
+                        <td class="width-208"><a href="#">操作</a></td>
                     </tr>
                     
                     <tr class="last-tr-style">
@@ -162,31 +162,34 @@
         </main>
         
         <aside>
-            <h2>这里以后是一个侧栏，这是侧栏的标题</h2>
-            <h2>侧栏注册窗口标题</h2>
+            <h2 class="side-h2">这里以后是一个侧栏，这是侧栏的标题</h2>
             <form>
-                <label>请输入邮箱地址：<input type="text" placeholder="这是一个文本输入框"></label>
-                <p>邮箱地址请按要求格式输入</p>
-                <label>请输入密码：<input type="password" placeholder="这是一个文本输入框"></label> 
-                <label>请重复输入密码：<input type="password" placeholder="这是一个文本输入框"></label>
-                <p>密码请为6-16位英文数字</p>
-                <p>
-                    <label>性别： <input type="radio" name="sex" value="male">男</label>
-                    <label><input type="radio" name="sex" value="female">女</label>
-                    <label>
-                        城市：
-                        <select>
-                            <option>北京</option>
-                        </select>
-                    </label> 
-                    
-                    <label>爱好：<input type="checkbox" value="sports">运动</label>
-                    <label><input type="checkbox" value="art">艺术</label>
-                    <label><input type="checkbox" value="science">科学</label>   
-                    <label>个人描述：
-                        <textarea>这是一个多行输入框，输入您的个人描述</textarea>
-                    </label>
-                    <input type="submit" value="确认提交">             
+                <div class="input-info">
+                    <label>请输入邮箱地址<input class="input-text" type="text" placeholder="这是一个文本输入框"></label>
+                    <p class="input-tips">邮箱地址请按要求格式输入</p>
+                    <label class="input-password">请输入密码<input class="input-text" type="password" placeholder="这是一个文本输入框"></label><br>
+                    <label>请重复输入密码<input class="input-text mgtp-12" type="password" placeholder="这是一个文本输入框"></label>
+                    <p class="input-tips">密码请为6-16位英文数字</p>
+                    <p>
+                        <label class="mglt-65">性别 <input class="mglt-10" type="radio" name="sex" value="male">男</label>
+                        <label><input type="radio" name="sex" value="female">女</label><br>
+                        <label class="mglt-65">
+                            城市
+                            <select class="mglt-10">
+                                <option>北京</option>
+                            </select>
+                        </label><br>
+                        
+                        <label class="mglt-65">爱好<input class="mglt-10" type="checkbox" value="sports">运动</label>
+                        <label><input class="mglt-10" type="checkbox" value="art">艺术</label>
+                        <label><input class="mglt-10" type="checkbox" value="science">科学</label>
+                        <br>  
+                        <label class="personal-info">个人描述
+                            <textarea>这是一个多行输入框，输入您的个人描述</textarea>
+                        </label>
+                </div>
+                    <br>
+                    <input class="button-submit" type="submit" value="确认提交">             
                 </p>
             </form>
         </aside>

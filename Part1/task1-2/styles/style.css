@@ -150,6 +150,88 @@ article p {
     color: #000;
 }
 
-.last-rol {
+.width-208 {
     width: 208px;
+}
+
+aside {
+    width: 1222px;
+    height: 500px;
+    background: #fff;
+    margin: 40px auto 20px auto;
+    padding: 20px 0 20px 20px;
+}
+
+.side-h2 {
+    padding: 3px 15px;
+    border-left: 2px solid #ccc;
+}
+
+.side-h2 + form {
+    margin: 30px 0 20px 0;
+    padding-bottom: 20px;
+}
+
+.input-info {
+    margin-left: 290px;
+}
+
+.input-text {
+    width: 150px;
+    height: 20px;
+    margin-left: 15px;
+}
+
+.input-tips {
+    margin-left: 114px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.input-password {
+    margin-left: 28px;
+}
+
+.mgtp-12 {
+    margin-top: 12px;
+}
+
+.mglt-65 {
+    margin-left: 68px;
+}
+
+.mglt-10 {
+    margin-left: 10px;
+    margin-bottom: 13px;
+}
+
+.personal-info {
+    margin-left: 40px;
+}
+
+.personal-info textarea {
+    margin-left: 15px;
+    width: 765px;
+    height: 98px;
+}
+
+.button-submit {
+    width: 1176px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background: #3552D0;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    font-family: "微软雅黑";
+}
+
+footer {
+    height: 70px;
+    background: #000;
+    text-align: center;
+    line-height: 70px;
+    color: #fff;
 }
