@@ -159,7 +159,7 @@ aside {
     height: 500px;
     background: #fff;
     margin: 40px auto 20px auto;
-    padding: 20px 0 20px 20px;
+    padding: 20px 0 5px 20px;
 }
 
 .side-h2 {
@@ -167,58 +167,68 @@ aside {
     border-left: 2px solid #ccc;
 }
 
-.side-h2 + form {
-    margin: 30px 0 20px 0;
-    padding-bottom: 20px;
+.input-box {
+    width: 290px;
+    margin: 0 0 0 288px;
+    padding-right: 30px;
+    text-align: right;
 }
 
-.input-info {
-    margin-left: 290px;
-}
-
-.input-text {
-    width: 150px;
-    height: 20px;
+input[type="text"],input[type="password"] {
+    height: 19px;
+    width: 132px;
     margin-left: 15px;
 }
 
-.input-tips {
-    margin-left: 114px;
+.email {
+    margin-top: 30px;
+}
+
+.password {
+    margin-bottom: 10px;
+}
+
+.repassword + p, .email + p {
+    margin-left: 440px;
     margin-top: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: #ccc;
+    font-size: 12px;
 }
 
-.input-password {
-    margin-left: 28px;
+.sex-city-hobby {
+    margin-left: 395px;
+    margin-bottom: 10px;
 }
 
-.mgtp-12 {
-    margin-top: 12px;
+.sex-city-hobby span {
+    margin-right: 15px;
 }
 
-.mglt-65 {
-    margin-left: 68px;
-}
-
-.mglt-10 {
-    margin-left: 10px;
-    margin-bottom: 13px;
-}
-
-.personal-info {
-    margin-left: 40px;
-}
-
-.personal-info textarea {
+#city {
     margin-left: 15px;
-    width: 765px;
+}
+
+.text-area {
+    margin-left: 367px;
+    margin-bottom: 20px;
+}
+
+.text-area > label {
+    float: left;
+    margin-right: 16px;
+}
+
+
+#person-info {
+    width: 650px;
     height: 98px;
 }
 
 .button-submit {
     width: 1176px;
     height: 40px;
+    margin: 0 auto;
     border-radius: 10px;
     border: none;
     background: #3552D0;

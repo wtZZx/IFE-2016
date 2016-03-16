@@ -164,33 +164,55 @@
         <aside>
             <h2 class="side-h2">这里以后是一个侧栏，这是侧栏的标题</h2>
             <form>
-                <div class="input-info">
-                    <label>请输入邮箱地址<input class="input-text" type="text" placeholder="这是一个文本输入框"></label>
-                    <p class="input-tips">邮箱地址请按要求格式输入</p>
-                    <label class="input-password">请输入密码<input class="input-text" type="password" placeholder="这是一个文本输入框"></label><br>
-                    <label>请重复输入密码<input class="input-text mgtp-12" type="password" placeholder="这是一个文本输入框"></label>
-                    <p class="input-tips">密码请为6-16位英文数字</p>
-                    <p>
-                        <label class="mglt-65">性别 <input class="mglt-10" type="radio" name="sex" value="male">男</label>
-                        <label><input type="radio" name="sex" value="female">女</label><br>
-                        <label class="mglt-65">
-                            城市
-                            <select class="mglt-10">
-                                <option>北京</option>
-                            </select>
-                        </label><br>
-                        
-                        <label class="mglt-65">爱好<input class="mglt-10" type="checkbox" value="sports">运动</label>
-                        <label><input class="mglt-10" type="checkbox" value="art">艺术</label>
-                        <label><input class="mglt-10" type="checkbox" value="science">科学</label>
-                        <br>  
-                        <label class="personal-info">个人描述
-                            <textarea>这是一个多行输入框，输入您的个人描述</textarea>
-                        </label>
-                </div>
-                    <br>
-                    <input class="button-submit" type="submit" value="确认提交">             
-                </p>
+                <fieldset>
+                    <div class="input-box email">
+                        <label for="email">请输入邮箱地址</label>
+                        <input type="text" name="email" id="email" placeholder="这是一个文本输入框">
+                    </div>
+                    <p>邮箱地址请按要求格式输入</p>
+                    
+                    <div class="input-box password">
+                        <label for="password">请输入密码</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+                    
+                    <div class="input-box repassword">
+                        <label for="re-password">请重复输入密码</label>
+                        <input type="password" name="re-password" id="re-password">
+                    </div>
+                    <p>密码请为6-16位英文数字</p>
+                    
+                    
+                    <div class="sex-city-hobby">
+                        <span>性别</span>
+                        <label for="male"><input type="radio" value="male" name="sex" id="male">男</label>
+                        <label for="female"><input type="radio" value="female" name="sex" id="female">女</label>
+                    </div>
+                    
+                    <div class="sex-city-hobby">
+                        <label for="city">城市</label>
+                        <select id="city">
+                            <option value="peiking">北京</option>
+                        </select>
+                    </div>
+                    
+                    <div class="sex-city-hobby">
+                        <span>爱好</span>
+                        <label for="sport"><input type="checkbox" value="sport" id="sport">运动</label>
+                        <label for="art"><input type="checkbox" value="art" id="art">艺术</label>
+                        <label for="science"><input type="checkbox" value="science" id="science">科学</label>
+                    </div>
+                    
+                    <div class="text-area">
+                        <label for="person-info">个人描述</label>
+                        <textarea name="person-info" id="person-info" placeholder="这是一个多行输入框，输入您的个人描述">
+                        </textarea>
+                    </div>
+                    
+                    <div>
+                        <input type="submit" value="确认提交" class="button-submit">
+                    </div>
+                </fieldset>
             </form>
         </aside>
         
