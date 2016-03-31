@@ -4,29 +4,25 @@ window.onload = function () {
         queueList = document.querySelector("#Queue-list"),     
         button = document.querySelector("fieldset");
         
-    function render() {
+    function renderQueue() {
         var value = inputBox.value.trim(),
-            valuePatt = /^\d{1,}$/g;
             opt = undefined;
             target = event.target;
-        
-        
-        if(valuePatt.test(value) && target.nodeName.toLowerCase() != "li") {
+     
+        if(target.nodeName.toLowerCase() != "li") {
             
             var docfrag = document.createDocumentFragment(),
                 listNode = document.createElement("li"),
                 opt = target.getAttribute("name");
                 
             listNode.textContent = value;
+            listNode.style.backgroundColor = "rgb(" + randomRGB() + "," + randomRGB() + "," + randomRGB() + ")";
             docfrag.appendChild(listNode);
-        } else if(target.nodeName.toLowerCase() == "li") {
-            opt = "clickList";
         } else {
-            opt = "inputError";
+            opt = "clickList";
         }
         
         switch(opt) {
-            case "inputError": alert(opt); break;
             case "clickList": removeList(); break;
             case "push" : push(); break;
             case "pop" : pop(); break;
@@ -54,8 +50,24 @@ window.onload = function () {
             queueList.removeChild(target);
         }
         
-    } 
+    }
+    
+    function randomRGB() {
+        return Math.floor(Math.random() * 255);
+    }
+    
+    
+    function checkInput () {
+        var inputPatt = /^\d{1,}$/g;
+        if(inputPatt.test(inputBox.value.trim())) {
+            renderQueue();
+        } else {
+            alert("只能输入数字");
+        }
+    }
+    
 
-    button.addEventListener("click", render, false);
-    queueList.addEventListener("click", render, false);
+    button.addEventListener("click", checkInput, false);
+    queueList.addEventListener("click", renderQueue, false);
+    
 };
