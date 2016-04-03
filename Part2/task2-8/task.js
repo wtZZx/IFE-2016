@@ -2,11 +2,12 @@ window.onload = function () {
     
     var inputBox = document.querySelector("#input-box"),
         queueList = document.querySelector("#Queue-list"),
-        sortButton = document.querySelector("#sort"),
-        random = document.querySelector("#random"),
+        searchInput = document.querySelector("#search-input"),
+        searchButton = document.querySelector("#search"),
         button = document.querySelector("fieldset");
         
     var queue= new Queue();
+    var inputProcessResult = undefined;
     
     // 渲染列表的系列方法
     var render = {
@@ -38,27 +39,6 @@ window.onload = function () {
                 }
             }
             queue.print();
-        },
-        
-        sort: function () {
-            var lists = queueList.querySelectorAll("li");
-            var arrayList = [];
-            for(var i = 0 ; i < lists.length; i++) {
-                arrayList[i] = parseInt(lists[i].textContent);
-                for(var j = 0 ; j < lists.length - 1 - i ; j++) {
-                    if(parseInt(lists[j].textContent) > parseInt(lists[j+1].textContent)) {
-                        swap(lists[j], lists[j + 1]);
-                    }
-                }
-            }
-            
-            function swap(listsJ, listJPlus) {
-                var tempNode = queueList.removeChild(listsJ);
-                queueList.insertBefore(tempNode, listJPlus.nextSlibing);
-            }
-            
-            return arrayList;
-            
         }
     }
     
@@ -74,7 +54,6 @@ window.onload = function () {
         
         listElement.style.backgroundColor = "rgb(" + randomRGB() + "," + randomRGB() + "," + randomRGB() + ")";
         listElement.textContent = value;
-        listElement.style.height = value + "px";
         
         docfrag.appendChild(listElement);   
         return docfrag;   
@@ -83,21 +62,60 @@ window.onload = function () {
     
     // 检测输入的数据是否合法
     function checkInput (event) {
-        event.stopPropagation();
         var inputPatt = /^\d{1,}$/g,
             inputValue = inputBox.value.trim();
             target = event.target;
-        if(inputPatt.test(inputValue) && (parseInt(inputValue) > 10 && parseInt(inputValue) < 100) && (queue.size() < 60)) {
+        if(inputPatt.test(inputValue)) {
             // 判断动作
             selectOpt(target, inputValue);
         } else {
-            alert("只能输入数字且为 10 ~ 100 || 点到空了");
+            alert("只能输入数字");
         }
+    }
+    
+    // 处理输入 
+    
+    function inputProcess (event) {
+        var inputValue = inputBox.value.trim(),
+            patt = /[\t\r\n\v,，＼、 　 ]/g,
+            target = event.target;
+            targetName = target.getAttribute("name");
+        if(targetName == "shift" || targetName == "pop") {
+            selectOpt(target);
+        } else {
+            inputProcessResult = inputValue.split(patt);
+            console.log(inputProcessResult); 
+            selectOpt(target, inputProcessResult);
+        }
+    }
+    
+    // 模糊查询的处理
+    
+    function searchProcess () {
+        var searchInputValue = searchInput.value.trim(),
+            patt = new RegExp(searchInputValue, "i");
+            lists = queueList.querySelectorAll("li");
+        for(var i = 0 ; i < lists.length ; i++) {
+            // console.log(patt.test(lists[i].textContent) + " :patt " + patt + ": items " + lists[i].textContent);
+            if(patt.exec(lists[i].textContent)) {
+                console.log(lists[i]);
+                lists[i].classList.add("find");
+                lists[i].style.backgroundColor = "#999";
+            } else {
+                lists[i].classList.remove("find");
+                lists[i].style.backgroundColor = "rgb(" + randomRGB() + "," + randomRGB() + "," + randomRGB() + ")";
+                console.log(false, i);
+            }
+        }     
     }
     
     // 队列与方法
     function Queue() {
         var items = [];
+        
+        this.items = function () {
+            return items;
+        }
         
         this.push = function (element) {
             items.push(element);
@@ -121,15 +139,7 @@ window.onload = function () {
         
         this.splice = function (pos) {
             items.splice(pos, 1);
-        };
-        
-        this.sort = function () {
-            items.sort(function (a, b) {
-                return a - b;
-            });
-            return items;
-        };
-        
+        }
         
         this.size = function () {
             return items.length;
@@ -147,49 +157,19 @@ window.onload = function () {
     // 判断队列的后续行为
     function selectOpt(target, inputValue) {
         var opt = target.getAttribute("name");
-        queue[opt](inputValue);
-        queue.print();
-    }
-    
-    function sortTimer(event) {
-        event.stopPropagation();
-        var array = queue.sort();
-                
-        (function () {
-            var timer = setInterval ( function () {
-                var arrayList = render.sort();
-                canStop();
-                function canStop() {
-                    var flag = true;
-                    for(var i = 0 ; i < array.length ; i++) {
-                        if(array [i] != arrayList[i]) {
-                            flag = false;
-                            break;
-                        }
-                    }
-                    if(flag) {
-                        clearInterval(timer);
-                        console.log("clear");
-                    }
-                }
-           }, 100)
-       })();
-
-    }
-    
-    function randomNum(event) {
-        event.stopPropagation();
-        var ranNum = undefined;
-        for(var i = 0 ; i < 20 ; i++) {
-            ranNum = Math.floor(Math.random() * 190 + 10);
-            queue.push(ranNum);
+        if(inputValue) {
+            for(var i = 0 ; i < inputValue.length ; i++) {
+                queue[opt](inputValue[i]);
+            }
+        } else {
+             queue[opt]();
         }
+        
         queue.print();
     }
     
     // 事件绑定
-    button.addEventListener("click", checkInput, false);
+    button.addEventListener("click", inputProcess, false);
     queueList.addEventListener("click", render.clickRemove, false);
-    sortButton.addEventListener("click", sortTimer, false);
-    random.addEventListener("click", randomNum, false);
+    searchButton.addEventListener("click", searchProcess, false);
 };
