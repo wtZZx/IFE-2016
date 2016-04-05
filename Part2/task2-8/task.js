@@ -1,13 +1,11 @@
-window.onload = function () {
-    
-    var inputBox = document.querySelector("#input-box"),
-        queueList = document.querySelector("#Queue-list"),
-        searchInput = document.querySelector("#search-input"),
-        searchButton = document.querySelector("#search"),
-        button = document.querySelector("fieldset");
+var inputBox = document.querySelector("#input-box"),
+    queueList = document.querySelector("#Queue-list"),
+    searchInput = document.querySelector("#search-input"),
+    searchButton = document.querySelector("#search"),
+    button = document.querySelector("fieldset");
         
-    var queue= new Queue();
-    var inputProcessResult = undefined;
+var queue= new Queue();
+var inputProcessResult = undefined;
     
     // 渲染列表的系列方法
     var render = {
@@ -96,7 +94,6 @@ window.onload = function () {
             patt = new RegExp(searchInputValue, "i");
             lists = queueList.querySelectorAll("li");
         for(var i = 0 ; i < lists.length ; i++) {
-            // console.log(patt.test(lists[i].textContent) + " :patt " + patt + ": items " + lists[i].textContent);
             if(patt.exec(lists[i].textContent)) {
                 console.log(lists[i]);
                 lists[i].classList.add("find");
@@ -172,4 +169,3 @@ window.onload = function () {
     button.addEventListener("click", inputProcess, false);
     queueList.addEventListener("click", render.clickRemove, false);
     searchButton.addEventListener("click", searchProcess, false);
-};
