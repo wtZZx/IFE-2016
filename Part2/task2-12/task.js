@@ -1,10 +1,12 @@
 (function() {
-    var root = document.querySelector("#root");
-    var arr = [];
-    var buttonList = document.querySelector("#buttonList");
-    var searchValue = document.querySelector("#search-input").value.trim();
-    var searchButton = document.querySelector("#search-button");
-    
+    var root = document.querySelector("#root"),
+        arr = [],
+        buttonList = document.querySelector("#buttonList"),
+        searchValue = document.querySelector("#search-input").value.trim(),
+        searchButton = document.querySelector("#search-button"),
+        delButton = document.querySelector("#del-button"),
+        newNodeButton = document.querySelector("#newNode-button");
+        
     
     var BFT = {
         // 二叉树的中序遍历
@@ -85,19 +87,18 @@
         
         if(opt === "inOrder") {
             BFT.inOrderTraverse(root, operation);
-            animation()
+            traverseAnimation()
         } else if(opt === "preOrder") {
             BFT.preOrderTraverse(root, operation);
-            animation()
+            traverseAnimation()
         } else if(opt === "postOrder") {
             BFT.postOrderTraverse(root, operation);
-            animation()
-        }
-        
+            traverseAnimation()
+        } 
     }
     
     
-    function animation() {
+    function traverseAnimation() {
         var i = 0;
         
         setInterval(function () {
@@ -117,9 +118,51 @@
         
     }
     
+    function addActiveClass(event) {
+        event.stopPropagation;
+        var target = event.target;
+        BFT.inOrderTraverse(root, removeActiveClass);
+        target.classList.add("active");
+        
+        // 删除节点的事件绑定
+        delButton.addEventListener("click", removeActiveNode.bind(null, target), false);
+        
+        // 添加节点的事件绑定
+        newNodeButton.addEventListener("click", addChildNode.bind(null, target), false);
+    }
+    
+    function removeActiveClass(node) {
+        event.stopPropagation;
+        node.classList.remove("active");
+    }
+    
+    function removeActiveNode(target) {
+        event.stopPropagation;
+        if(target.parentNode) {
+            target.parentNode.removeChild(target);
+        }
+    }
+    
+    function addChildNode (target) {
+        event.stopPropagation;
+        var  nodeValue = document.querySelector("#new-node-input").value.trim();
+        if(nodeValue && target.classList.contains("active")) {
+            var docfrag = document.createDocumentFragment(),
+                node = document.createElement("div");
+            
+            node.textContent = nodeValue;
+            docfrag.appendChild(node);
+            target.appendChild(docfrag);
+        }
+    }
+        
+    
+    
     function init () {
         buttonList.addEventListener("click", selectOpt, false);
         searchButton.addEventListener("click", selectOpt, false);
+        
+        root.addEventListener("click", addActiveClass, false);
     }
     
     init();
