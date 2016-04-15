@@ -79,30 +79,37 @@
     })();
     
     // 动力系统
-    ship.prototype.powerSystem = function (commond) {
+    ship.prototype.powerSystem = (function (commond) {
 
-        var ship = this;
-        var base = 5;
-        // 判断是否在飞
-        if(this.state === false && commond === "start") {
-            this.state = true;
-            this.flytimer = setInterval(function () {
-                if(ship.energy > 1) {
-                    // 减电
-                    ship.energySystem.usePower.call(ship);
-                    ship.createShip.style.transform = "rotate(" + ship.rotate + "deg)";
-                    ship.rotate = ship.rotate + base; 
-                } else {
+        return {
+            start: function () {
+                var ship = this;
+                var base = 5;
+                if(this.state === false && this.energy > 1) {
+                    this.state = true;
+                    this.flytimer = setInterval(function () {
+                        if(ship.energy > 1) {
+                            ship.energySystem.usePower.call(ship);
+                            ship.createShip.style.transform = "rotate(" + ship.rotate + "deg)";
+                            ship.rotate = ship.rotate + base;
+                        } else {
+                            ship.energySystem.solarPower.call(ship);
+                        }
+                    }, 100);
+                } else if(this.energy <= 1) {
                     ship.energySystem.solarPower.call(ship);
                 }
-            }, 100);
+            },
             
-        } else if(this.state === true && commond === "stop") {
-            clearInterval(this.flytimer);
-            this.state = false;
+            stop: function () {
+                if(this.state === true) {
+                    clearInterval(this.flytimer);
+                    this.state = false;
+                }
+            }
         }
         
-    };
+    })();
     
     // 信号系统
     ship.prototype.signalSystem = function (commond) {
@@ -209,7 +216,8 @@
                     // 广播给每个飞船进行信号配对
                     if(element !== null && element.signalSystem(commond).flag === true) {
                         var trank = element.signalSystem(commond).trank;
-                        space.ship[parseInt(trank)].powerSystem.call(space.ship[parseInt(trank)], commond.commond);
+                        // space.ship[parseInt(trank)].powerSystem.call(space.ship[parseInt(trank)], commond.commond);
+                        space.ship[parseInt(trank)].powerSystem.start.call(space.ship[parseInt(trank)]);
                     }
                 }, this);
             },
@@ -219,7 +227,8 @@
                     // 广播给每个飞船进行信号配对
                     if(element !== null && element.signalSystem(commond).flag === true) {
                         var trank = element.signalSystem(commond).trank;
-                        space.ship[parseInt(trank)].powerSystem.call(space.ship[parseInt(trank)], commond.commond);
+                        // space.ship[parseInt(trank)].powerSystem.call(space.ship[parseInt(trank)], commond.commond);
+                        space.ship[parseInt(trank)].powerSystem.stop.call(space.ship[parseInt(trank)]);
                     }
                 }, this);
             }
