@@ -277,6 +277,7 @@
         return {
             send: function (commond) {
                 var randomNum = Math.floor(Math.random() * 100);
+                
                 while(randomNum < 10) {
                     consolePanel("发送的 " + commond + "指令丢包了, 正在重试...", false);
                     randomNum = Math.floor(Math.random() * 100);
@@ -357,24 +358,30 @@
             destructShip: function (commondCode) {
                 space.ship.forEach(function(element, index) {
                     // 广播给每个飞船进行信号配对
-                    var commond = element.adapter.getCommond(commondCode);
-                    if(element !== null && element.signalSystem(commond).flag === true) {
-                        var trank = element.signalSystem(commond).trank;
-                        space.ship[parseInt(trank)].selfDestructSystem.call(space.ship[parseInt(trank)]);
-                        space.ship[parseInt(trank)] = null;
-                        space.trank[trank] = false;
+                    if(element != null) {
+                        var commond = element.adapter.getCommond(commondCode);
+                        if(element.signalSystem(commond).flag === true) {
+                            var trank = element.signalSystem(commond).trank;
+                            space.ship[parseInt(trank)].selfDestructSystem.call(space.ship[parseInt(trank)]);
+                            space.ship[parseInt(trank)] = null;
+                            space.trank[trank] = false;
+                        }
                     }
+                    
                 }, this);
+
+                
             },
             
             startShip: function (commondCode) {
                 space.ship.forEach(function(element, index) {
                     // 广播给每个飞船进行信号配对
-                    var commond = element.adapter.getCommond(commondCode);
-                    if(element !== null && element.signalSystem(commond).flag === true) {
-                        var trank = element.signalSystem(commond).trank;
-                        // space.ship[parseInt(trank)].powerSystem.call(space.ship[parseInt(trank)], commond.commond);
-                        space.ship[parseInt(trank)].powerSystem.start.call(space.ship[parseInt(trank)]);
+                    if(element != null) {
+                        var commond = element.adapter.getCommond(commondCode);
+                        if(element.signalSystem(commond).flag === true) {
+                            var trank = element.signalSystem(commond).trank;
+                            space.ship[parseInt(trank)].powerSystem.start.call(space.ship[parseInt(trank)]);
+                        }
                     }
                 }, this);
             },
@@ -382,11 +389,12 @@
             stopShip: function (commondCode) {
                 space.ship.forEach(function(element, index) {
                     // 广播给每个飞船进行信号配对
-                    var commond = element.adapter.getCommond(commondCode);
-                    if(element !== null && element.signalSystem(commond).flag === true) {
-                        var trank = element.signalSystem(commond).trank;
-                        // space.ship[parseInt(trank)].powerSystem.call(space.ship[parseInt(trank)], commond.commond);
-                        space.ship[parseInt(trank)].powerSystem.stop.call(space.ship[parseInt(trank)]);
+                    if(element != null) {
+                        var commond = element.adapter.getCommond(commondCode);
+                        if(element.signalSystem(commond).flag === true) {
+                           var trank = element.signalSystem(commond).trank;
+                           space.ship[parseInt(trank)].powerSystem.stop.call(space.ship[parseInt(trank)]); 
+                        }
                     }
                 }, this);
             }
