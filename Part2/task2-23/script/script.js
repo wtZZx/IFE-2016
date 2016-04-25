@@ -194,6 +194,7 @@
         }
     }
     
+    
     function init() {
         var pointX = Math.floor(Math.random() * 9 + 1),
             pointY = Math.floor(Math.random() * 9 + 1);
@@ -203,6 +204,7 @@
             lineList = document.querySelector(".line-list"),
             lineNum = 1;
         
+        var checkCommond = /^GO( \d){0,1}$|^TUN( LEF| RIG| BAC)$|^TRA (LEF|TOP|RIG|BOT)( \d){0,1}$|^MOV (LEF|TOP|RIG|BOT)( \d){0,1}$/i;
         
         // 初始化小方块
         var squ = new Square(pointX, pointY);
@@ -213,14 +215,9 @@
                 var li = document.createElement("li");
                 li.textContent = ++lineNum;
                 lineList.appendChild(li);
-            } else if(event.code === "Backspace") {
-                console.log(event.keyCode);
-                if(lineList.lastElementChild && lineNum !== 1) {
-                    lineList.removeChild(lineList.lastElementChild);
-                    lineNum--;
-                }
             }
         }, false);
+        
         
         // 行号随文本框一同滚动
         commondInput.addEventListener("scroll", function () {
@@ -230,54 +227,56 @@
         runButton.addEventListener("click", function () {
             var commond = commondInput.value.trim();
             commondArray = commond.split(/\n/g);
-            
+            var commondBak = commondArray;
             var i = 0;
+            
+            commondArray = processRepeat(commondArray);
+            
+            commondBak.forEach(function(element, index) {
+                if(checkCommond.test(element)) {
+                    lineList.querySelectorAll("li")[index].style.backgroundColor = "green";
+                } else {
+                    lineList.querySelectorAll("li")[index].style.backgroundColor = "red";
+                }
+            }, this);
             
             var timer = setInterval(function () {
                 if(i < commondArray.length) {
                     commondArray[i] = commondArray[i].toUpperCase();
-                    // 判断指令是否带参数
-                    if(/\d{1,}/.test(commondArray[i])) {
-                        processRepeat.call(squ, commondArray[i], i, lineList);
-                    } else {
-                        try {
-                            squ.processCommond[commondArray[i]].call(squ);
-                        } catch(e) {
-                            console.log(e);
-                            lineList.querySelectorAll("li")[i].style.color = "red";
-                        }
+                    try {
+                        squ.processCommond[commondArray[i]].call(squ);
+                        i++;
+                    } catch(e) {
+                        console.log(e);
+                        clearInterval(timer);
                     }
-                    i++;
                 } else {
                     clearInterval(timer);
                 }
             }, 500);
-            
+           
         }, false);
     }
     
     // 处理带参数的指令
-    function processRepeat (commond, count, lineList) {
+    function processRepeat (commondArray) {
         var findNum = /\d{1,}/;
-        var noRepeatCommond = commond.replace(findNum, "").trim();
-        var repeatCount = commond.match(findNum)[0];
+        var noRepeatCommond = undefined;
+        var repeatCount = undefined;
+        var newArr = [];
         
-        var i = 0;
-        var squ = this;
-        
-        var timer = setInterval(function () {
-            if(i < repeatCount) {
-                try {
-                    squ.processCommond[noRepeatCommond].call(squ);
-                    i++;
-                } catch (e) {
-                    lineList.querySelectorAll("li")[count].style.color = "red";
+        for(var i = 0; i < commondArray.length; i++) {
+            if(findNum.test(commondArray[i])) {
+                repeatCount = parseInt(commondArray[i].match(findNum)[0]);
+                noRepeatCommond = commondArray[i].replace(findNum, "").trim();
+                for(var j = 0; j < repeatCount; j++) {
+                    newArr.push(noRepeatCommond);
                 }
             } else {
-                clearInterval(timer);
+                newArr.push(commondArray[i]);
             }
-        }, 600);
-        
+        }
+        return newArr;
     }
 
     init();
