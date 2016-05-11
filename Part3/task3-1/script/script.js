@@ -96,19 +96,38 @@
     Popup.prototype.addEvent = function () {
         this.node.okButton.addEventListener("click", this.setting.okCallback.bind(this), false);
         this.node.cancelButton.addEventListener("click", this.setting.cancelCallback, false);
-    }
+        if(this.setting.drag === true) {
+            this.node.title.addEventListener("mousedown", this.drag.bind(this), false);
+        }
+    };
     
+    Popup.prototype.drag = function (event){
+        var moveX = event.clientX - this.node.popup.offsetLeft,
+            moveY = event.clientY - this.node.popup.offsetTop;
+        this.node.title.onmousemove = this.drag.move.bind(this, moveX, moveY);
+    };
+    
+    Popup.prototype.drag.move = function (moveX, moveY) {
+        this.node.popup.style.left = (event.clientX - moveX) + "px";
+        this.node.popup.style.top = (event.clientY - moveY) + "px";
+        this.node.popup.style.marginLeft = 0 + "px";
+        this.node.popup.style.marginTop = 0 + "px";
+        this.node.title.addEventListener("mouseup", this.drag.mouseUp.bind(this), false);
+    };
+    
+    Popup.prototype.drag.mouseUp = function () {
+        this.node.title.onmousemove = null;
+        this.node.title.removeEventListener("mouseup", this.drag.mouseUp.bind(this), false);
+    };
     
     
     var test = popup({
         width: 600,
         height: 300,
         title: "自定义标题",
-        content: "这是弹出浮层"
+        content: "这是弹出浮层",
+        drag: true
     });
-    
-    
-    
     
     
     function $(element) {
