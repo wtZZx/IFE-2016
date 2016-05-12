@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Microsoft YaHei";
+}
+
+
+#calendar-wrap {
+    width: 220px;
+    height: 240px;
+    border: 1px solid #ccc;
+    margin: 100px;
+}
+
+.date-select-panel {
+    width: 220px;
+    height: 30px;
+    background: rgba(204, 0, 0, 1);
+}
+
+.select-style {
+    border: 1px solid rgba(204, 0, 0, 1);
+    vertical-align: -webkit-baseline-middle;
+}
+
+.day-table {
+    width: 220px;
+    font-size: 12px;
+    height: 200px;
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+
+.day-table tr td:first-child, .day-table tr td:last-child {
+    color: rgba(204, 0, 0, 1);
+}
+
+.day-table td {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.week-row {
+    font-weight: bold;
+}
+
+.toDay-select-style {
+    background: rgba(204, 0, 0, 1);
+    color: #fff;
+}
+
+.dayTD-mouseover {
+    cursor: pointer;
+    border: 1px solid rgba(204, 0, 0, 1);
+}
+
+.past-date {
+    color: #ccc;
+}
