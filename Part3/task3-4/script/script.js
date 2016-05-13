@@ -14,6 +14,7 @@
             },
             
             initRender: function () {
+                // 日历的 wrap 须是 id 为 calendar-wrap 的元素
                 this.wrap = document.querySelector("#calendar-wrap");
                 var dateSelectPanel = document.createElement("div"),
                     yearSelect = document.createElement("select"),
@@ -87,6 +88,7 @@
                             if(selectedDate.getDate() == this.toDay.getDate()) {
                                 dayTD.classList.add("toDay-select-style");
                                 dayTD.style.color = "#fff";
+                                this.node.lastSelect = dayTD;
                             } else if(selectedDate < this.toDay) {
                                 dayTD.classList.add("past-date");
                                 dayTD.style.color = "#ccc";
@@ -117,13 +119,27 @@
                     monthSelect = this.node.monthSelect.options[this.node.monthSelect.selectedIndex].value,
                     daySelect = event.target.textContent;
                     
-                var selectDay = new Date(yearSelect, monthSelect-1, daySelect)
+                var selectDay = new Date(yearSelect, monthSelect-1, daySelect);
+                // 最近一次选中的元素
+                this.node.lastSelect.classList.remove("select-day");
+                if(!event.target.classList.contains("past-date")) {
+                    event.target.classList.add("select-day");
+                    this.node.lastSelect = event.target;
+                    this.renderSelectInput(selectDay);
+                }
+                
                 this.getSelectDate(selectDay);
             },
             
             // 取得选中的日期
             getSelectDate: function (selectDay) {
                 return selectDay;  
+            },
+            
+            renderSelectInput: function (selectDay) {
+                // 日期选择框须是 id 为 date-select 的元素
+                var selectInput = document.querySelector("#date-select");
+                selectInput.value = selectDay.toLocaleDateString();
             },
             
             dayMouseOver: function () {
@@ -138,20 +154,12 @@
             addEvent: function () {
                 this.node.yearSelect.addEventListener("change", this.processEvent.bind(this), false);
                 this.node.monthSelect.addEventListener("change", this.processEvent.bind(this), false);
-            },
-            
-            settingChoiseDay: function () {
-                
             }
-            
         }
 
     })();
     
     
     Calendar.init();
-    
-    
-    
     
 })();
