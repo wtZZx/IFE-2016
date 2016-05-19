@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <template id="calendar-template">
+            <div id="calendar-wrap">
+                <div class="date-select-panel">
+                    <select class="select-style" v-model="selectedYear" v-on:change="yearChangeMethod">
+                        <option v-for="year in yearData" v-bind:value="year">
+                            {{ year }}
+                        </option>
+                    </select>
+                    <select class="select-style" v-model="selectedMonth" v-on:change="monthChangeMethod">
+                        <option v-for="month in monthData" v-bind:value="month">
+                            {{ month }}
+                        </option>
+                    </select>
+                </div>
+                
+                <table class="day-table">
+                    <tr v-for="item in days" track-by="$index">
+                        <td v-for="day in item" track-by="$index">
+                            {{ day }}
+                        </td>
+                    </tr>
+                </table>
+                
+            </div>
+        </template>
+        
+        
+        <div id="app">
+            <calendar>
+            </calendar>
+        </div>
+        
+        <script src="./script/bundle.js"></script>
+    </body>
+</html>

@@ -3,13 +3,13 @@
     var Calendar = (function() {
 
         return {
-            init: function(selectCallback, isRange, maxRange) {
+            init: function(selectCallback, isRange = false, maxRange = undefined) {
                 this.selectDateFrom = new Date(1970, 1, 1); // 日历的最小可选时间
                 this.selectDateTo = new Date(2020, 1, 1); // 日历的最大可选时间
                 this.toDay = new Date();
                 this.selectCallback = selectCallback;
-                this.isRange = (isRange ? isRange: false);
-                this.maxRange = (isRange ? maxRange: undefined);
+                this.isRange = isRange;
+                this.maxRange = maxRange;
                 this.range = [];
                 this.initRender();
                 this.renderDayTable();
